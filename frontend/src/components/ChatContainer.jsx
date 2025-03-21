@@ -6,9 +6,13 @@ import MessageSkeleton from "../components/skeletons/MessageSkeleton"
 import { useAuthStore } from '../store/useAuthStore';
 
 function ChatContainer() {
+
+
   const { message, getMessages, isMessagesLoading, selectedUser, subscribeToMessage, unsubscribeToMessage } = useChatStore();
   const { authUser } = useAuthStore()
   const messageEndRef = useRef(null);
+
+
   useEffect(() => {
     getMessages(selectedUser._id)
     subscribeToMessage()
@@ -36,12 +40,12 @@ function ChatContainer() {
     <div className='flex-1 flex flex-col overflow-auto'>
 
       <ChatHeader />
-      <div className='flex-1 overflow-y-hidden p-4 space-y-4'>
+      <div className='flex-1 overflow-y-scroll  p-4 space-y-4'>
         {
           message.map((message) => (
             <div
               key={message._id}
-              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"} `}
               ref={messageEndRef}
             >
 
